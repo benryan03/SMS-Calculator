@@ -1,7 +1,17 @@
 <?php
 
 use Twilio\Twiml\MessagingResponse;
+
+header("content-type: text/xml");
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+
 session_start();
+
+function saveSessionVariables(){
+    $_SESSION['operation'] = $operation;
+    $_SESSION['firstNum'] = $firstNum;
+    $_SESSION['secondNum'] = $secondNum;
+}
 
 // Check session variables
 $firstNum = null;
@@ -26,6 +36,7 @@ if (strtolower($input) == "clear" | strtolower($input) == "c"){
 elseif (!isset($_SESSION['operation'])){
     $operation = $input;
     $output = $operation . ": Enter the first number.";
+    saveSessionVariables();
 }
 
 // FIRST NUMBER
@@ -33,6 +44,7 @@ elseif ($firstNum == null) {
     $operation = $_SESSION['operation'];
     $firstNum = $_REQUEST['Body'];
     $output = "Enter the second number.";
+    saveSessionVariables();
 }
 
 // SECOND NUMBER
@@ -56,14 +68,6 @@ elseif($firstNum != null & $secondNum == null) {
     $output = $firstNum . " " . $operation . " " . $secondNum . " = " . $result;
     session_unset();
 }
-
-// Save session variables
-$_SESSION['operation'] = $operation;
-$_SESSION['firstNum'] = $firstNum;
-$_SESSION['secondNum'] = $secondNum;
-
-header("content-type: text/xml");
-echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 
 ?>
 
