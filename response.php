@@ -22,45 +22,45 @@ if (strtolower($input) == "clear" | strtolower($input) == "c"){
     $output = "Cleared.";
 }
 
-// OPERATION OR NUMBER
-else { // OPERATION
-    if(!isset($_SESSION['operation'])) {
-        $operation = $input;
-        $output = $operation . ": Enter the first number.";
-    }
-    else { // NUMBER
-        $operation = $_SESSION['operation'];
-        if ($firstNum == null) { // FIRST NUMBER
-            $firstNum = $_REQUEST['Body'];
-            $output = "Enter the second number.";}
-
-        elseif($firstNum != null & $secondNum == null) { // SECOND NUMBER
-            $secondNum = $_REQUEST['Body'];
-
-            // CALCULATE RESULT
-            if ($operation == "+"){
-                $result = $firstNum + $secondNum;
-            }
-            elseif ($operation == "-"){
-                $result = $firstNum - $secondNum;
-            }
-            elseif ($operation == "*"){
-                $result = $firstNum * $secondNum;
-            }
-            elseif ($operation == "/"){
-                $result = $firstNum / $secondNum;
-            }
-
-            $output = $firstNum . " " . $operation . " " . $secondNum . " = " . $result;
-            session_unset();
-        }
-    }
-
-    // Save session variables
-    $_SESSION['operation'] = $operation;
-    $_SESSION['firstNum'] = $firstNum;
-    $_SESSION['secondNum'] = $secondNum;
+// OPERATION
+elseif (!isset($_SESSION['operation'])){
+    $operation = $input;
+    $output = $operation . ": Enter the first number.";
 }
+
+// FIRST NUMBER
+elseif ($firstNum == null) {
+    $operation = $_SESSION['operation'];
+    $firstNum = $_REQUEST['Body'];
+    $output = "Enter the second number.";
+}
+
+// SECOND NUMBER
+elseif($firstNum != null & $secondNum == null) {
+    $operation = $_SESSION['operation'];
+    $secondNum = $_REQUEST['Body'];
+
+    // CALCULATE RESULT
+    if ($operation == "+"){
+        $result = $firstNum + $secondNum;
+    }
+    elseif ($operation == "-"){
+        $result = $firstNum - $secondNum;
+    }
+    elseif ($operation == "*"){
+        $result = $firstNum * $secondNum;
+    }
+    elseif ($operation == "/"){
+        $result = $firstNum / $secondNum;
+    }
+    $output = $firstNum . " " . $operation . " " . $secondNum . " = " . $result;
+    session_unset();
+}
+
+// Save session variables
+$_SESSION['operation'] = $operation;
+$_SESSION['firstNum'] = $firstNum;
+$_SESSION['secondNum'] = $secondNum;
 
 header("content-type: text/xml");
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
