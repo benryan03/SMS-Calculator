@@ -1,8 +1,6 @@
 <?php
 
 use Twilio\Twiml\MessagingResponse;
-
-// start the session
 session_start();
 
 // Check session variables
@@ -15,15 +13,12 @@ if(isset($_SESSION['secondNum'])){
     $secondNum = $_SESSION['secondNum'];
 }
 
-
+// Parse input
 $input = $_REQUEST['Body'];
 
 // CLEAR
-if ($input == "Clear"){
+if (strtolower($input) == "clear" | strtolower($input) == "c"){
     session_unset();
-    $firstNum = null; // DEBUG
-    $secondNum = null; // DEBUG
-    $operation = null; // DEBUG
     $output = "Cleared.";
 }
 
@@ -59,8 +54,6 @@ else { // OPERATION
             $output = $firstNum . " " . $operation . " " . $secondNum . " = " . $result;
             session_unset();
         }
-
-        
     }
 
     // Save session variables
