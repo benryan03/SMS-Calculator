@@ -66,6 +66,8 @@ header("content-type: text/xml");
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 
 ?>
+
+<!-- This is "TwiML" code. The Twilio API is expecting these tags. -->
 <Response>
         <Message><?php echo $output ?></Message>
 </Response>
