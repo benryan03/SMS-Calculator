@@ -13,7 +13,7 @@ function saveSessionVariables(){
     $_SESSION['secondNum'] = $secondNum;
 }
 
-// Check session variables
+// Import session variables if they exist
 $firstNum = null;
 $secondNum = null;
 if(isset($_SESSION['firstNum'])){
@@ -47,23 +47,19 @@ elseif ($firstNum == null) {
     saveSessionVariables();
 }
 
-// SECOND NUMBER
+// SECOND NUMBER - CALCULATE RESULT
 elseif($firstNum != null & $secondNum == null) {
     $operation = $_SESSION['operation'];
     $secondNum = $_REQUEST['Body'];
-
-    // CALCULATE RESULT
-    if ($operation == "+"){
-        $result = $firstNum + $secondNum;
-    }
-    elseif ($operation == "-"){
-        $result = $firstNum - $secondNum;
-    }
-    elseif ($operation == "*"){
-        $result = $firstNum * $secondNum;
-    }
-    elseif ($operation == "/"){
-        $result = $firstNum / $secondNum;
+    switch($operation){
+        case "+":
+            $result = $firstNum + $secondNum;
+        case "-":
+            $result = $firstNum - $secondNum;
+        case "*":
+            $result = $firstNum * $secondNum;
+        case "/":
+            $result = $firstNum / $secondNum;
     }
     $output = $firstNum . " " . $operation . " " . $secondNum . " = " . $result;
     session_unset();
