@@ -27,9 +27,9 @@ $input = $_REQUEST['Body'];
 // CLEAR
 if (strtolower($input) == "clear" | strtolower($input) == "c"){
     session_unset();
-    $firstNum = null; // DEBUG
-    $operation = null; // DEBUG
-    $secondNum = null; // DEBUG
+    $firstNum = null;
+    $operation = null;
+    $secondNum = null;
     $output = "Cleared.";
 }
 
