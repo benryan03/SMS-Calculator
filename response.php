@@ -87,6 +87,11 @@ $_SESSION['firstNum'] = $firstNum;
 $_SESSION['operation'] = $operation;
 $_SESSION['secondNum'] = $secondNum;
 
+// LOG
+$log = fopen("test_log.txt", a);
+fwrite($log, date("Y/m/d h:i:sa"). " | INPUT: " . $input . " | OUTPUT: " . $output . "\n");
+fclose($log);
+
 ?>
 
 <!-- This is "TwiML" code. The Twilio API is expecting these tags. -->
